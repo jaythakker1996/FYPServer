@@ -1,0 +1,16 @@
+CREATE OR REPLACE FUNCTION before_insert_login()  
+  RETURNS trigger AS  
+$$  
+BEGIN  
+NEW.id = nextval('id_seq');  
+RETURN NEW;  
+END;  
+  
+$$  
+LANGUAGE 'plpgsql';  
+
+CREATE TRIGGER before_insert_login 
+  BEFORE INSERT  
+  ON login  
+  FOR EACH ROW  
+  EXECUTE PROCEDURE before_insert_login();  

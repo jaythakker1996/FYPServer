@@ -29,7 +29,7 @@ public class LoginService {
 	}
 
 	public void saveValues() {
-		loginRepository.save(new Login(1,"abc","abc"));
-		loginRepository.save(new Login(2,"abcd","abc"));
+		loginRepository.save(new Login("abc","abc"));
+		loginRepository.save(new Login("abcd","abc"));
 	}
 }

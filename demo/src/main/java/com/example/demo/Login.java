@@ -21,15 +21,14 @@ public class Login {
 		
 	}
 	
-	public Login(int id, String username, String password) {
+	public Login( String username, String password) {
 		super();
-		this.id = id;
 		this.username = username;
 		this.password = password;
 	}
 	
 	
-	//@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	public int getId() {
 		return id;
 	}
