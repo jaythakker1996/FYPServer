@@ -21,18 +21,18 @@ public class LoginController {
 	}
 	
 	@RequestMapping("/login")
-	public List<Login> getAllLogin(){
+	public List<User> getAllLogin(){
 		return loginService.getAllLogin();
 	}
 	
-	@RequestMapping("/login/{username}")
-	public Login getLogIn(@PathVariable String username){
-		return loginService.getLogIn(username);
+	@RequestMapping("/login/{username}and{password}")
+	public Success getLogIn(@PathVariable String username,@PathVariable String password){
+		return loginService.getLogIn(username,password);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST,value="/login")
-	public void addUser(@RequestBody Login login)
+	public Success addUser(@RequestBody User user)
 	{
-		loginService.addUser(login);
+		return loginService.addUser(user);
 	}
 }

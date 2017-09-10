@@ -1,7 +1,7 @@
 package com.example.demo;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface LoginRepository extends CrudRepository<Login, String> {
+public interface LoginRepository extends JpaRepository<User, String> {
 
 }
