@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
 
-	//Values brought from session factory ie dependency injection
+	//Values brought from session factory i.e. dependency injection
 	@Autowired
 	private LoginService loginService;
 	
@@ -28,7 +28,8 @@ public class LoginController {
 	//Everything in {} represents a variable in the URL
 	@RequestMapping("/login/{username}and{password}")
 	public Success getLogIn(@PathVariable String username,@PathVariable String password){
-		return loginService.getLogIn(username,password);
+		Success success=new Success(true);
+		return success;
 	}
 	
 	@RequestMapping(method=RequestMethod.POST,value="/login")
@@ -47,6 +48,13 @@ public class LoginController {
 			return restCalls.getApiCall(zomatoUrl,null);
 		else
 			return "Failed after call";
+	}
+	
+	@RequestMapping("/search")
+	public String getSearch(Search search)
+	{
+		
+		return "sagarsoft";
 	}
 	
 }
