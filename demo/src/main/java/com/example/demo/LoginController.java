@@ -51,10 +51,10 @@ public class LoginController {
 	}
 	
 	@RequestMapping("/search")
-	public String getSearch(Search search)
+	public Success getSearch(Search search)
 	{
-		
-		return "sagarsoft";
+		System.out.println("Here For eval");
+		return new Success(true);
 	}
 	
 }
