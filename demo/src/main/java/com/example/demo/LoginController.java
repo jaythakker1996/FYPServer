@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginController {
 
-	//Values brought from session factory i.e. dependency injection
+	//Values brought from session factory ie dependency injection
 	@Autowired
 	private LoginService loginService;
 	
@@ -28,8 +28,7 @@ public class LoginController {
 	//Everything in {} represents a variable in the URL
 	@RequestMapping("/login/{username}and{password}")
 	public Success getLogIn(@PathVariable String username,@PathVariable String password){
-		Success success=new Success(true);
-		return success;
+		return loginService.getLogIn(username,password);
 	}
 	
 	@RequestMapping(method=RequestMethod.POST,value="/login")
@@ -44,17 +43,31 @@ public class LoginController {
 		String zomatoUrl = "https://developers.zomato.com/api/v2.1/categories";
 
 		RestCalls restCalls=new RestCalls();
+		
 		if(restCalls!=null)
-			return restCalls.getApiCall(zomatoUrl,null);
+			return restCalls.getApiCall(zomatoUrl,null,0);
+		else
+			return "Failed after call";
+	}
+
+	
+	
+	@RequestMapping("/cab?start_latitude={slat}&start_longitude={slong}&end_latitude={elat}&end_longitude={elong}&seat_count={seat}")
+	public String getCab(@PathVariable float slat,@PathVariable float slong,@PathVariable float elat,@PathVariable float elong,@PathVariable float seat) {
+	
+		String uberUrl = "https://api.uber.com//v1.2/estimates/price?start_latitude="+slat+"&start_longitude="+slong+"&end_latitude="+elat+"&end_longitude="+elong;
+		
+		RestCalls restCalls = new RestCalls();
+		if(restCalls!=null)
+			return restCalls.getApiCall(uberUrl,null,1);
 		else
 			return "Failed after call";
 	}
 	
 	@RequestMapping("/search")
-	public Success getSearch(Search search)
+	public String getSearch(Search search)
 	{
-		System.out.println("Here For eval");
-		return new Success(true);
+		
+		return "sagarsoft";
 	}
-	
 }

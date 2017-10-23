@@ -16,7 +16,7 @@ public class RestCalls {
 	{
 	}
 	
-	public String getApiCall(String zomatoUrl,JSONObject json)
+	public String getApiCall(String apiUrl,JSONObject json,int type)
 	{
 		//Verify changes
 		
@@ -24,9 +24,17 @@ public class RestCalls {
 		HttpHeaders httpHeaders = new HttpHeaders();
 		
 		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
-		
-		String accessToken ="b0dd24cdb0dc487b527e518264e529f5";
-		
+		String accessToken;
+		String accessTokenZ ="b0dd24cdb0dc487b527e518264e529f5";
+		String accessTokenU ="KA.eyJ2ZXJzaW9uIjoyLCJpZCI6InBjckF3R3BLUzRhb2JtbGZEYUVnMlE9PSIsImV4cGlyZXNfYXQiOjE1MTEzNDY1MzksInBpcGVsaW5lX2tleV9pZCI6Ik1RPT0iLCJwaXBlbGluZV9pZCI6MX0.3YjsxTKT7u6LmByTIgzGsLxR_WXNmAsaV9C2gFFScO0";
+		if(type==0)
+		{
+			accessToken=accessTokenZ;
+		}
+		else
+		{
+			accessToken=accessTokenU;
+		}
 		httpHeaders.set("user-key", accessToken);
 		HttpEntity <String> httpEntity;
 		
@@ -41,7 +49,7 @@ public class RestCalls {
 		}
 		
 		//Sending the packet to server
-		String response = restTemplate.postForObject(zomatoUrl, httpEntity, String.class);
+		String response = restTemplate.postForObject(apiUrl, httpEntity, String.class);
 
 		
 		JSONObject jsonObj;
