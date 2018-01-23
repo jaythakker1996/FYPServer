@@ -24,18 +24,22 @@ public class RestCalls {
 		HttpHeaders httpHeaders = new HttpHeaders();
 		
 		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+		String header;
 		String accessToken;
 		String accessTokenZ ="b0dd24cdb0dc487b527e518264e529f5";
 		String accessTokenU ="KA.eyJ2ZXJzaW9uIjoyLCJpZCI6InBjckF3R3BLUzRhb2JtbGZEYUVnMlE9PSIsImV4cGlyZXNfYXQiOjE1MTEzNDY1MzksInBpcGVsaW5lX2tleV9pZCI6Ik1RPT0iLCJwaXBlbGluZV9pZCI6MX0.3YjsxTKT7u6LmByTIgzGsLxR_WXNmAsaV9C2gFFScO0";
 		if(type==0)
 		{
+			header="user-key";
 			accessToken=accessTokenZ;
 		}
 		else
 		{
+			header="Authorization";
 			accessToken=accessTokenU;
+			
 		}
-		httpHeaders.set("user-key", accessToken);
+		httpHeaders.set(header,"Bearer "+ accessToken);
 		HttpEntity <String> httpEntity;
 		
 		if(json!=null)

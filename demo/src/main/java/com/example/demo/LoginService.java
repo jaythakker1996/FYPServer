@@ -55,4 +55,12 @@ public class LoginService {
 		//loginRepository.save(new User(1,"abc","abc","","",mySet,1));
 		//loginRepository.save(new User(2,"jay","abc","","",mySet,1));
 	}
+	
+	public List<Restaurant> getAllResult() {
+		List<Restaurant> list=new ArrayList<>();
+		Restaurant rest=new Restaurant();
+		Restaurant rest1=new Restaurant();
+		list.add(rest);
+		return list;
+	}
 }

@@ -52,11 +52,11 @@ public class LoginController {
 
 	
 	
-	@RequestMapping("/cab?start_latitude={slat}&start_longitude={slong}&end_latitude={elat}&end_longitude={elong}&seat_count={seat}")
-	public String getCab(@PathVariable float slat,@PathVariable float slong,@PathVariable float elat,@PathVariable float elong,@PathVariable float seat) {
+	@RequestMapping("/cab/{slat}and{slong}and{elat}and{elong}and{seat}")
+	public String getCab(@PathVariable Double slat,@PathVariable Double slong,@PathVariable Double elat,@PathVariable Double elong,@PathVariable Integer seat) {
 	
-		String uberUrl = "https://api.uber.com//v1.2/estimates/price?start_latitude="+slat+"&start_longitude="+slong+"&end_latitude="+elat+"&end_longitude="+elong;
-		
+		String uberUrl = "https://api.uber.com//v1.2/estimates/price?start_latitude="+slat.toString()+"&start_longitude="+slong.toString()+"&end_latitude="+elat.toString()+"&end_longitude="+elong.toString();
+		System.out.println(uberUrl);
 		RestCalls restCalls = new RestCalls();
 		if(restCalls!=null)
 			return restCalls.getApiCall(uberUrl,null,1);
@@ -65,9 +65,9 @@ public class LoginController {
 	}
 	
 	@RequestMapping("/search")
-	public String getSearch(Search search)
+	public List<Restaurant> getSearch()
 	{
 		
-		return "sagarsoft";
+		return loginService.getAllResult();
 	}
 }

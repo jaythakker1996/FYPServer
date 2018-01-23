@@ -32,6 +32,7 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+			
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -43,12 +44,31 @@
     		<artifactId>json</artifactId>
     		<version>20170516</version>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
+		<!--
+		<dependency>
+			<groupId>com.uber.sdk</groupId>
+			<artifactId>uber-rides</artifactId>
+			<version>0.7.0</version>
+			<exclusions>
+    			<exclusion>
+       				<groupId>org.slf4j</groupId>
+        			<artifactId>slf4j-log4j12</artifactId>
+    			</exclusion>
+			</exclusions> 
+		</dependency>
+		
+		<dependency>
+  			<groupId>com.uber.sdk</groupId>
+  			<artifactId>uber-core</artifactId>
+  			<version>0.7.0</version>
+		</dependency>   -->
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -59,7 +79,11 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		
 	</dependencies>
+
+
 
 	<build>
 		<plugins>
