@@ -1,8 +1,10 @@
 package com.example.demo;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,8 @@ public class LoginService {
 
 	@Autowired
 	private LoginRepository loginRepository;
+	@Autowired
+	private RestaurantRepository restaurantRepository;
 	
 	public List<User> getAllLogin() {
 		List<User> user=new ArrayList<>();
@@ -56,11 +60,19 @@ public class LoginService {
 		//loginRepository.save(new User(2,"jay","abc","","",mySet,1));
 	}
 	
-	public List<Restaurant> getAllResult() {
+	public void addRest()
+	{
+		restaurantRepository.exists("abc");
+	}
+	
+	public Map<String, List<Restaurant>> getAllResult() {
+		Map<String, List<Restaurant>> map = new HashMap<String, List<Restaurant>>();
 		List<Restaurant> list=new ArrayList<>();
 		Restaurant rest=new Restaurant();
 		Restaurant rest1=new Restaurant();
 		list.add(rest);
-		return list;
+		list.add(rest1);
+		map.put("Results", list);
+		return map;
 	}
 }

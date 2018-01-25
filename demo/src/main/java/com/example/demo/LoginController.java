@@ -1,6 +1,7 @@
 package com.example.demo;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -37,6 +38,7 @@ public class LoginController {
 		return loginService.addUser(user);
 	}
 	
+	
 	@RequestMapping("/categories")
 	public String getCategories()
 	{	
@@ -45,27 +47,38 @@ public class LoginController {
 		RestCalls restCalls=new RestCalls();
 		
 		if(restCalls!=null)
-			return restCalls.getApiCall(zomatoUrl,null,0);
+			return restCalls.postApiCall(zomatoUrl,null);
 		else
 			return "Failed after call";
 	}
 
+	@RequestMapping("/FillTable")
+	public String addRest()
+	{
+		String zomatoUrl = "https://developers.zomato.com/api/v2.1/search?entity_id=3&entity_type=city&start=80&count=20";
+
+		RestCalls restCalls=new RestCalls();
+		
+		if(restCalls!=null)
+			return restCalls.postApiCall(zomatoUrl,null);
+		else
+			return "Failed after call";
+}
 	
 	
 	@RequestMapping("/cab/{slat}and{slong}and{elat}and{elong}and{seat}")
 	public String getCab(@PathVariable Double slat,@PathVariable Double slong,@PathVariable Double elat,@PathVariable Double elong,@PathVariable Integer seat) {
 	
-		String uberUrl = "https://api.uber.com//v1.2/estimates/price?start_latitude="+slat.toString()+"&start_longitude="+slong.toString()+"&end_latitude="+elat.toString()+"&end_longitude="+elong.toString();
-		System.out.println(uberUrl);
 		RestCalls restCalls = new RestCalls();
 		if(restCalls!=null)
-			return restCalls.getApiCall(uberUrl,null,1);
+			//return restCalls.UberCall();
+			return restCalls.getApiCall(slat,slong,elat,elong,seat);
 		else
 			return "Failed after call";
 	}
 	
 	@RequestMapping("/search")
-	public List<Restaurant> getSearch()
+	public Map<String, List<Restaurant>> getSearch()
 	{
 		
 		return loginService.getAllResult();
