@@ -3,6 +3,7 @@ package com.example.demo;
 import java.util.List;
 import java.util.Map;
 
+import org.json.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -60,7 +61,31 @@ public class LoginController {
 		RestCalls restCalls=new RestCalls();
 		
 		if(restCalls!=null)
+		{
+			
+			JSONObject jsonObj=restCalls.postApiCallJ(zomatoUrl, null);
+			int resultsFound = jsonObj.getInt("results_found");
+			int resultsShown= jsonObj.getInt("results_shown");
+			JSONArray arr = jsonObj.getJSONArray("restaurants");
+			System.out.println("result "+resultsFound); 
+			for (int i = 0; i < arr.length(); i++)
+			{
+			    String id = arr.getJSONObject(i).getJSONObject("restaurant").getString("id");
+			    String name = arr.getJSONObject(i).getJSONObject("restaurant").getString("name");
+			    double lat=arr.getJSONObject(i).getJSONObject("restaurant").getJSONObject("location").getDouble("latitude");
+			    double longi=arr.getJSONObject(i).getJSONObject("restaurant").getJSONObject("location").getDouble("longitude");
+			    String area=arr.getJSONObject(i).getJSONObject("restaurant").getJSONObject("location").getString("locality");
+			    double cost = (arr.getJSONObject(i).getJSONObject("restaurant").getDouble("average_cost_for_two"))/2;
+			    String cuisine = arr.getJSONObject(i).getJSONObject("restaurant").getString("cuisines");
+			    
+			    System.out.println("id "+id+" name "+name+" latitude "+lat+" longitude "+longi+" area "+area+" cost "+cost+" cuisine "+cuisine); 
+			    Restaurant rest=new Restaurant(id,name,area,longi,cost,lat,cuisine);
+			    loginService.addRest(rest);
+			}
 			return restCalls.postApiCall(zomatoUrl,null);
+		
+		}
+		
 		else
 			return "Failed after call";
 }

@@ -60,9 +60,9 @@ public class LoginService {
 		//loginRepository.save(new User(2,"jay","abc","","",mySet,1));
 	}
 	
-	public void addRest()
+	public void addRest(Restaurant rest)
 	{
-		restaurantRepository.exists("abc");
+		restaurantRepository.save(rest);
 	}
 	
 	public Map<String, List<Restaurant>> getAllResult() {

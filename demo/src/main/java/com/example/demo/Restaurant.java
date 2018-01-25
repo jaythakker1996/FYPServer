@@ -17,16 +17,27 @@ public class Restaurant {
 	    private String cuisine;
 	    
 	    public Restaurant(){
+	    	restId="llol";
 	    	name="llol";	
 	    	area="llol";	
 	    	est_cost_per_person=10;
 	    }
 
-	    
+	    public Restaurant(Restaurant rest)
+	    {
+	    	this.restId=rest.restId;
+	    	this.name =rest.name;
+			this.area = rest.area;
+			this.longitude = rest.longitude;
+			this.est_cost_per_person = rest.est_cost_per_person;
+			this.latitude = rest.latitude;
+			this.cuisine = rest.cuisine;
+		}
 	    
 		public Restaurant(String restId,String name, String area, double longitude, double est_cost_per_person, double latitude,
 				String cuisine) {
 			super();
+			this.restId=restId;
 			this.name = name;
 			this.area = area;
 			this.longitude = longitude;

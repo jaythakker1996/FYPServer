@@ -32,7 +32,7 @@ public class RestCalls {
 		header="user-key";
 		accessToken=accessTokenZ;
 		
-		httpHeaders.set(header,"Bearer "+ accessToken);
+		httpHeaders.set(header,accessToken);
 		HttpEntity <String> httpEntity;
 		
 		if(json!=null)
@@ -64,6 +64,53 @@ public class RestCalls {
 		}
 
 	}
+	
+	public JSONObject postApiCallJ(String apiUrl,JSONObject json)
+	{
+		//Verify changes
+		
+		//To add headers when authentication and other additional headers used
+		HttpHeaders httpHeaders = new HttpHeaders();
+		
+		httpHeaders.setContentType(MediaType.APPLICATION_JSON);
+		String header;
+		String accessToken;
+		header="user-key";
+		accessToken=accessTokenZ;
+		
+		httpHeaders.set(header,accessToken);
+		HttpEntity <String> httpEntity;
+		
+		if(json!=null)
+		{
+			//Creation of packet with headers
+		 httpEntity = new HttpEntity <String> (json.toString(), httpHeaders);
+		}
+		else
+		{
+		 httpEntity = new HttpEntity <String> (null, httpHeaders);
+		}
+		
+		//Sending the packet to server
+		String response = restTemplate.postForObject(apiUrl, httpEntity, String.class);
+
+		
+		JSONObject jsonObj;
+		try {
+			jsonObj = new JSONObject(response);
+			String resp = jsonObj.toString();
+			System.out.println("Json "+resp );
+			return jsonObj;
+		}
+		catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("Here");
+			return null;
+		}
+
+	}
+
 	
 	public String getApiCall(Double slat,Double slong,Double elat,Double elong,Integer seat)
 	{
