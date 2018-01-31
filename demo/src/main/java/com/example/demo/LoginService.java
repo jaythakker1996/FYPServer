@@ -54,10 +54,8 @@ public class LoginService {
 		return new Success(true);
 	}
 
-	public void saveValues() {
-		Role mySet=new Role();
-		//loginRepository.save(new User(1,"abc","abc","","",mySet,1));
-		//loginRepository.save(new User(2,"jay","abc","","",mySet,1));
+	public String homePage() {
+		return("API V1");	
 	}
 	
 	public void addRest(Restaurant rest)
@@ -68,10 +66,8 @@ public class LoginService {
 	public Map<String, List<Restaurant>> getAllResult() {
 		Map<String, List<Restaurant>> map = new HashMap<String, List<Restaurant>>();
 		List<Restaurant> list=new ArrayList<>();
-		Restaurant rest=new Restaurant();
-		Restaurant rest1=new Restaurant();
-		list.add(rest);
-		list.add(rest1);
+		restaurantRepository.findAll()
+		.forEach(list::add);
 		map.put("Results", list);
 		return map;
 	}

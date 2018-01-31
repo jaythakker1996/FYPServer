@@ -14,7 +14,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.6.RELEASE</version>
+		<version>1.5.10.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
@@ -32,17 +32,15 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-			
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-
+		
 		<dependency>
-   			<groupId>org.json</groupId>
-    		<artifactId>json</artifactId>
-    		<version>20170516</version>
+			<groupId>org.springframework.security.oauth</groupId>
+			<artifactId>spring-security-oauth2</artifactId>
 		</dependency>
 		
 		<dependency>
@@ -50,24 +48,12 @@
 			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
-		<!--
-		<dependency>
-			<groupId>com.uber.sdk</groupId>
-			<artifactId>uber-rides</artifactId>
-			<version>0.7.0</version>
-			<exclusions>
-    			<exclusion>
-       				<groupId>org.slf4j</groupId>
-        			<artifactId>slf4j-log4j12</artifactId>
-    			</exclusion>
-			</exclusions> 
-		</dependency>
 		
 		<dependency>
-  			<groupId>com.uber.sdk</groupId>
-  			<artifactId>uber-core</artifactId>
-  			<version>0.7.0</version>
-		</dependency>   -->
+   			<groupId>org.json</groupId>
+    		<artifactId>json</artifactId>
+    		<version>20170516</version>
+		</dependency>
 		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -79,11 +65,7 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
-		
 	</dependencies>
-
-
 
 	<build>
 		<plugins>

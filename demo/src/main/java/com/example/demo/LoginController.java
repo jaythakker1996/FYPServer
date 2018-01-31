@@ -18,29 +18,29 @@ public class LoginController {
 	@Autowired
 	private LoginService loginService;
 	
-	@RequestMapping("/save")
-	public void saveValues(){
-		loginService.saveValues();
+	@RequestMapping("/")
+	public String homePage(){
+		return loginService.homePage();
 	}
 	
-	@RequestMapping("/login")
+	@RequestMapping("/auth/login")
 	public List<User> getAllLogin(){
 		return loginService.getAllLogin();
 	}
 	//Everything in {} represents a variable in the URL
-	@RequestMapping("/login/{username}and{password}")
+	@RequestMapping("/auth/login/{username}and{password}")
 	public Success getLogIn(@PathVariable String username,@PathVariable String password){
 		return loginService.getLogIn(username,password);
 	}
 	
-	@RequestMapping(method=RequestMethod.POST,value="/login")
+	@RequestMapping(method=RequestMethod.POST,value="/subscribe")
 	public Success addUser(@RequestBody User user)
 	{
 		return loginService.addUser(user);
 	}
 	
 	
-	@RequestMapping("/categories")
+	@RequestMapping("/auth/categories")
 	public String getCategories()
 	{	
 		String zomatoUrl = "https://developers.zomato.com/api/v2.1/categories";
@@ -53,7 +53,7 @@ public class LoginController {
 			return "Failed after call";
 	}
 
-	@RequestMapping("/FillTable")
+	@RequestMapping("/auth/FillTable")
 	public String addRest()
 	{
 		String zomatoUrl = "https://developers.zomato.com/api/v2.1/search?entity_id=3&entity_type=city&start=80&count=20";
@@ -91,7 +91,7 @@ public class LoginController {
 }
 	
 	
-	@RequestMapping("/cab/{slat}and{slong}and{elat}and{elong}and{seat}")
+	@RequestMapping("/auth/cab/{slat}and{slong}and{elat}and{elong}and{seat}")
 	public String getCab(@PathVariable Double slat,@PathVariable Double slong,@PathVariable Double elat,@PathVariable Double elong,@PathVariable Integer seat) {
 	
 		RestCalls restCalls = new RestCalls();
@@ -102,8 +102,8 @@ public class LoginController {
 			return "Failed after call";
 	}
 	
-	@RequestMapping("/search")
-	public Map<String, List<Restaurant>> getSearch()
+	@RequestMapping(method=RequestMethod.POST,value="/auth/search")
+	public Map<String, List<Restaurant>> getSearch(@RequestBody SearchJson sjson)
 	{
 		
 		return loginService.getAllResult();
