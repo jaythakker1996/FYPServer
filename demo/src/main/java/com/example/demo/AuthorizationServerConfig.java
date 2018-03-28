@@ -14,6 +14,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 //https://jugbd.org/2017/09/19/implementing-oauth2-spring-boot-spring-security/
 //https://www.youtube.com/watch?v=0pD7YeTAUkk&list=PL0SqXGoZcpU4Cz7HEjYSSF04-w3E1SCmD
 //https://github.com/arocketman/Spring-oauth2-jpa-example
+
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {

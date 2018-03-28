@@ -15,12 +15,10 @@ public class Restaurant {
 	    private double est_cost_per_person;
 	    private double latitude;
 	    private String cuisine;
+	    private double rating;
 	    
 	    public Restaurant(){
-	    	restId="llol";
-	    	name="llol";	
-	    	area="llol";	
-	    	est_cost_per_person=10;
+	    	
 	    }
 
 	    public Restaurant(Restaurant rest)
@@ -32,10 +30,11 @@ public class Restaurant {
 			this.est_cost_per_person = rest.est_cost_per_person;
 			this.latitude = rest.latitude;
 			this.cuisine = rest.cuisine;
+			this.rating=rest.rating;
 		}
 	    
 		public Restaurant(String restId,String name, String area, double longitude, double est_cost_per_person, double latitude,
-				String cuisine) {
+				String cuisine,double rating) {
 			super();
 			this.restId=restId;
 			this.name = name;
@@ -44,10 +43,20 @@ public class Restaurant {
 			this.est_cost_per_person = est_cost_per_person;
 			this.latitude = latitude;
 			this.cuisine = cuisine;
+			this.rating=rating;
 		}
 
 
 
+		public double getRating() {
+			return rating;
+		}
+
+		public void setRating(double rating) {
+			this.rating = rating;
+		}
+
+		
 		public String getRestId() {
 			return restId;
 		}
