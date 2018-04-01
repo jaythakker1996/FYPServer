@@ -138,6 +138,13 @@ public class LoginController {
 		return loginService.getAllResult(sjson);
 	}
 	
+	@RequestMapping(method=RequestMethod.POST,value="/auth/details")
+	public Details getSearch(@RequestBody SelectRest rest)
+	{
+		return loginService.getFinalRest(rest);
+	}
+	
+	
 	@RequestMapping("/auth/FillLocation")
 	public void fillLoc()
 	{
@@ -202,8 +209,8 @@ public class LoginController {
 		List<Location> loc= locationRepository.findAll();
 		List<Location> rloc= locationRepository.findAll();
 		
-		for(int i=0;i<=30;i++)
-			for(int j=30;j<=60;j++)
+		for(int i=80;i<=80;i++)
+			for(int j=78;j<=83;j++)
 			{
 				if(i!=j)
 				{

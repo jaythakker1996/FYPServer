@@ -18,7 +18,7 @@ public class CustQueue {
 			this.sort();
 			System.out.println("\n\n\n\n\n Here Selected w = "+w+"\n\n\n\n\n");
 		}
-		else if(rWei[9]<w)
+		else if(rWei[9]>w)
 		{
 			rWei[9]=w;
 			rFin[9]=r;
@@ -30,10 +30,13 @@ public class CustQueue {
 	{
 		for(int j=i;j>0;j--)
 		{
-			if(rWei[j]>rWei[j-1])
+			if(rWei[j]<rWei[j-1])
 			{
+				Restaurant tempr=rFin[j];
 				double temp=rWei[j];
+				rFin[j]=rFin[j-1];
 				rWei[j]=rWei[j-1];
+				rFin[j-1]=tempr;
 				rWei[j-1]=temp;
 			}
 		}
@@ -43,5 +46,8 @@ public class CustQueue {
 		System.out.println("\n\n\n\n\n Here Final w = "+rWei[j]+"\n\n\n\n");
 		
 		return rFin[j];
+	}
+	public double Wget(int j) {
+		return rWei[j];
 	}
 }
