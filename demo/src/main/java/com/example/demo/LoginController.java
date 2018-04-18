@@ -138,10 +138,24 @@ public class LoginController {
 		return loginService.getAllResult(sjson);
 	}
 	
+	@RequestMapping(method=RequestMethod.POST,value="/auth/abc")
+	public Map<String, List<Movie>> getMovies(@RequestBody SearchJson sjson)
+	{
+		return loginService.getMovie(sjson);
+	}
+	
 	@RequestMapping(method=RequestMethod.POST,value="/auth/details")
 	public Details getSearch(@RequestBody SelectRest rest)
 	{
+		System.out.println("Hereeeeee");
 		return loginService.getFinalRest(rest);
+	}
+	
+	@RequestMapping(method=RequestMethod.POST,value="/auth/userdata")
+	public Success getUserData(@RequestBody Userdata udata)
+	{
+		loginService.addUserData(udata);
+		return new Success(true);
 	}
 	
 	

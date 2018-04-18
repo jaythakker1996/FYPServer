@@ -23,6 +23,10 @@ public class LoginService {
     private LocationRepository locationRepository;
 	@Autowired
 	private GridRepository gridRepository;
+	@Autowired
+	private MovieRepository movieRepository;
+	@Autowired
+	private UserRepository userRepository;
 	
 	List<Location> loclist;
 	
@@ -54,6 +58,13 @@ public class LoginService {
 			return s;
 		}
 		
+	}
+	
+	public void addUserData(Userdata ud) {
+		User u=loginRepository.getOne(ud.getEmail());
+		ud.setId(u.getId());
+		System.out.println(""+ud.getId());
+		userRepository.save(ud);
 	}
 
 	public Success addUser(User user) {
@@ -97,8 +108,8 @@ public class LoginService {
 		int i=0;
 		Details det=new Details();
 		URestCalls restCalls = new URestCalls();
-		
-		while(list.get(i)!=null)
+		System.out.println("Hereeeee");
+		while(i!=6000)
 		{
 			if(list.get(i).getRestId().equals(rest.getRestId()))
 			{
@@ -114,18 +125,18 @@ public class LoginService {
 				det.setUber_cost(uberCost);
 				det.setTotal_cost(uberCost+list.get(i).getEst_cost_per_person());
 				det.setDistance(job.getJSONArray("prices").getJSONObject(3).getDouble("distance"));
-				det.setTotal_time(30+(2*job.getJSONArray("prices").getJSONObject(3).getDouble("duration")));
+				det.setTotal_time(30+(job.getJSONArray("prices").getJSONObject(3).getDouble("duration")/60));
 			}
 			i++;
 		}
-		return null;
+		return det;
 	}
 	
 	public List<Restaurant> getML(SearchJson sjson){
 		List<Restaurant> list=new ArrayList<>();
 		List<Restaurant> rest=new ArrayList<>();
 		restaurantRepository.findAll().forEach(list::add);
-		double uRating=3.5;
+		double uRating=3.0;
 		String uCusine=sjson.getCuisine();
 		double uCost=sjson.getBudget();
 		double uLatitude=sjson.getLatitude();
@@ -196,7 +207,7 @@ public class LoginService {
 					if(((time+30)<=uTime)&&((rCost+cCost)<=uCost))
 					{	
 						double temp=d+l+t-(list.get(i).getRating()*10000);
-						System.out.println("\n Here l = "+l+" d = "+d+" t = "+t+" temp :"+temp+"\n");
+						System.out.println("\n Here l = "+l+" d = "+d+" t = "+t+" Rating :"+list.get(i).getRating()*10000+" temp :"+temp+"\n");
 						que.Qadd(list.get(i),temp);
 					}	
 				}
@@ -242,4 +253,64 @@ public class LoginService {
 		
 		return result;
 	}
+	
+	public  Map<String, List<Movie>> getMovie(SearchJson sjson){
+		Map<String, List<Movie>> map = new HashMap<String, List<Movie>>();
+		List<Movie> list=new ArrayList<>();
+		movieRepository.findAll()
+		.forEach(list::add);
+		
+		map.put("Results", list);
+		return map;
+		
+	}
+	
+	public List<Movie> getMovieML(SearchJson sjson){
+		List<Movie> list=new ArrayList<>();
+		List<Movie> rest=new ArrayList<>();
+		movieRepository.findAll().forEach(list::add);
+		double uCost=sjson.getBudget();
+		double uLatitude=sjson.getLatitude();
+		double uLongitude=sjson.getLongitude();
+		double uTime=sjson.getTime();
+		CustQueue que=new CustQueue();
+		loclist=locationRepository.findAll();
+		List<Grid> grid=gridRepository.findAll();
+		for(int i=0;i<=1000;i++)
+		{
+			int userHotspot=this.Hotspot(uLatitude, uLongitude);
+			System.out.println("Here userhotspot "+userHotspot+"\n");
+			double lat=Double.parseDouble(list.get(i).getLat());
+			double lng=Double.parseDouble(list.get(i).getLng());
+			int restHotspot=this.Hotspot(lat,lng);
+			System.out.println("Here resthotspot "+restHotspot+"\n");
+			
+			Grid gridval=new Grid();
+			
+			for(int j=0;j<4211;j++)
+			{
+				if(grid.get(j).getGfrom()==userHotspot&&grid.get(j).getGto()==restHotspot)
+				{
+					gridval=grid.get(j);
+				}
+				else if(grid.get(j).getGfrom()==restHotspot&&grid.get(j).getGto()==userHotspot)
+				{
+					gridval=grid.get(j);
+				}
+			}
+			if(userHotspot==restHotspot)
+			{
+				gridval.setCost(25);
+				gridval.setDistance(2.0);
+				gridval.setGfrom(userHotspot);
+				gridval.setGto(restHotspot);
+				gridval.setTime(5*60);
+			}
+			
+		}
+		
+		return rest;
+	}
+	
+	
 }
