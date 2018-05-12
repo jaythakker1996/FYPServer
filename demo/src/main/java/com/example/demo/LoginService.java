@@ -109,7 +109,7 @@ public class LoginService {
 		Details det=new Details();
 		URestCalls restCalls = new URestCalls();
 		System.out.println("Hereeeee");
-		while(i!=6000)
+		while(i!=6600)
 		{
 			if(list.get(i).getRestId().equals(rest.getRestId()))
 			{
@@ -123,9 +123,10 @@ public class LoginService {
 				JSONObject job=restCalls.UberCall(rest.getLatitude(),rest.getLongitude(),list.get(i).getLatitude(),list.get(i).getLongitude(),2);	
 				double uberCost=((job.getJSONArray("prices").getJSONObject(3).getDouble("high_estimate"))+(job.getJSONArray("prices").getJSONObject(3).getDouble("low_estimate")))/2;
 				det.setUber_cost(uberCost);
+				System.out.println("cost "+uberCost);
 				det.setTotal_cost(uberCost+list.get(i).getEst_cost_per_person());
 				det.setDistance(job.getJSONArray("prices").getJSONObject(3).getDouble("distance"));
-				det.setTotal_time(30+(job.getJSONArray("prices").getJSONObject(3).getDouble("duration")/60));
+				det.setTotal_time(30+(job.getJSONArray("prices").getJSONObject(3).getDouble("duration")/30));
 			}
 			i++;
 		}
